@@ -1,6 +1,6 @@
 # Equipes
 
-Lista das equipes (até 4 pessoas), montada a partir dos forks (atualizada em 05/11/2026, 20h20). Cada equipe preenche o nome do time e os integrantes no README **do próprio fork**. Só **um integrante por equipe** faz o fork; os outros entram como colaboradores.
+Lista das equipes (até 4 pessoas), montada a partir dos forks (atualizada em 05/11/2026, 20h50). Cada equipe preenche o nome do time e os integrantes no README **do próprio fork**. Só **um integrante por equipe** faz o fork; os outros entram como colaboradores.
 
 | Time | Integrantes (usuário do GitHub) | Fork |
 | --- | --- | --- |
@@ -15,4 +15,4 @@ Lista das equipes (até 4 pessoas), montada a partir dos forks (atualizada em 05
 | fragmentado | Matheus Cardoso (matheusdev1) | [matheusdev1/bd-integracao-dados-engs242n01](https://github.com/matheusdev1/bd-integracao-dados-engs242n01) |
 | a preencher | Jhemily Albuquerque (jhemilyalbuquerque) | [jhemilyalbuquerque-ship-it/bd-integracao-dados-engs242n01](https://github.com/jhemilyalbuquerque-ship-it/bd-integracao-dados-engs242n01) |
 | a preencher | Vitor Davi (vitordavips) | [vitordavips/bd-integracao-dados-engs242n01](https://github.com/vitordavips/bd-integracao-dados-engs242n01) |
-| a preencher | TheDevAndy (dono do fork) | [TheDevAndy/bd-integracao-dados-engs242n01](https://github.com/TheDevAndy/bd-integracao-dados-engs242n01) |
+| Triple-A | Andreza (TheDevAndy), Adalberto (AdalbertoLu), André (Andre-soft) | [TheDevAndy/bd-integracao-dados-engs242n01](https://github.com/TheDevAndy/bd-integracao-dados-engs242n01) |
