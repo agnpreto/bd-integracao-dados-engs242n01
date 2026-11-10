@@ -16,4 +16,4 @@ Lista das equipes (até 4 pessoas), montada a partir dos forks (atualizada em 10
 | — | Jhemily Albuquerque: entrou na equipe do TVPRpontoDev; este fork não será usado | [jhemilyalbuquerque-ship-it/bd-integracao-dados-engs242n01](https://github.com/jhemilyalbuquerque-ship-it/bd-integracao-dados-engs242n01) |
 | a preencher | Vitor Davi (vitordavips) | [vitordavips/bd-integracao-dados-engs242n01](https://github.com/vitordavips/bd-integracao-dados-engs242n01) |
 | Triple-A | Andreza (TheDevAndy), Adalberto (AdalbertoLu), André (Andre-soft) | [TheDevAndy/bd-integracao-dados-engs242n01](https://github.com/TheDevAndy/bd-integracao-dados-engs242n01) |
-| a preencher | Lucas Tiezze (tiezzelucas); README do fork ainda sem nome do time e integrantes | [tiezzelucas/bd-integracao-dados-engs242n01](https://github.com/tiezzelucas/bd-integracao-dados-engs242n01) |
+| a preencher | tiezzelucas (README do fork ainda sem nome do time e integrantes) | [tiezzelucas/bd-integracao-dados-engs242n01](https://github.com/tiezzelucas/bd-integracao-dados-engs242n01) |
