@@ -9,10 +9,8 @@
 **Nome do time:** ____________________
 
 | Nome | Matrícula | Usuário do GitHub |
-| Vitor Davi | --- | --- |
-|  |  |  |
-|  |  |  |
-|  |  |  |
+| --- | --- | --- |
+| Vitor Davi Pereira Soares |  | vitordavips |
 
 ## O cenário
 
