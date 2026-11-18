@@ -1,6 +1,6 @@
 # Equipes
 
-Lista das equipes (até 4 pessoas), montada a partir dos forks (atualizada em 15/11/2026, 07h40). Cada equipe preenche o nome do time e os integrantes no README **do próprio fork**. Só **um integrante por equipe** faz o fork; os outros entram como colaboradores.
+Lista das equipes (até 4 pessoas), montada a partir dos forks (atualizada em 18/11/2026, 17h40). Cada equipe preenche o nome do time e os integrantes no README **do próprio fork**. Só **um integrante por equipe** faz o fork; os outros entram como colaboradores.
 
 | Time | Integrantes (usuário do GitHub) | Fork |
 | --- | --- | --- |
@@ -10,8 +10,8 @@ Lista das equipes (até 4 pessoas), montada a partir dos forks (atualizada em 15
 | Cuiudos | Angelo (angelotoledano), Lucas, Nicole | [angelotoledano/bd-integracao-dados-engs242n01](https://github.com/angelotoledano/bd-integracao-dados-engs242n01) |
 | a preencher | Tacio Vinicio (TVPRpontoDev), Jade Coimbra (Coimbra-Jade), Jackeline Alves (jackelinealves27), Jhemily Albuquerque (jhemilyalbuquerque) | [TVPRpontoDev/bd-integracao-dados-engs242n01](https://github.com/TVPRpontoDev/bd-integracao-dados-engs242n01) |
 | Casal | Wallesson Cesar (wallessonvinhote), Chrisllen Oliveira (ChrislenOliveira) | [wallessonvinhote/bd-integracao-dados-engs242n01](https://github.com/wallessonvinhote/bd-integracao-dados-engs242n01) |
-| For the Horde | Merivaldo Ferreira de Aquino Filho (MerivaldoFerreira) | [MerivaldoFerreira/bd-integracao-dados-engs242n01](https://github.com/MerivaldoFerreira/bd-integracao-dados-engs242n01) |
-| Antunes | João Victor Antunes da Silva (AntunesJoao) | [AntunesJoao/bd-integracao-dados-engs242n01](https://github.com/AntunesJoao/bd-integracao-dados-engs242n01) |
+| For the Horde | Merivaldo Ferreira de Aquino Filho (MerivaldoFerreira, 2270242) | [MerivaldoFerreira/bd-integracao-dados-engs242n01](https://github.com/MerivaldoFerreira/bd-integracao-dados-engs242n01) |
+| Antunes | João Victor Antunes da Silva (AntunesJoao) — ⚠️ no README do fork o usuário está na coluna Matrícula; falta matrícula | [AntunesJoao/bd-integracao-dados-engs242n01](https://github.com/AntunesJoao/bd-integracao-dados-engs242n01) |
 | fragmentado | Matheus Cardoso (matheusdev1) | [matheusdev1/bd-integracao-dados-engs242n01](https://github.com/matheusdev1/bd-integracao-dados-engs242n01) |
 | — | Jhemily Albuquerque: entrou na equipe do TVPRpontoDev; este fork não será usado | [jhemilyalbuquerque-ship-it/bd-integracao-dados-engs242n01](https://github.com/jhemilyalbuquerque-ship-it/bd-integracao-dados-engs242n01) |
 | a preencher | Vitor Davi (vitordavips) | [vitordavips/bd-integracao-dados-engs242n01](https://github.com/vitordavips/bd-integracao-dados-engs242n01) |
