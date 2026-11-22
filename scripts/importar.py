@@ -1,16 +1,21 @@
 import pandas as pd
 import psycopg2
 from datetime import datetime, timedelta
+from dotenv import load_dotenv
 
-# ── Configurações ──────────────────────────────────────────
-ARQUIVO = "dados/base_teste.xlsx"  #trocar caminho do dataset dos Senhores
+RAIZ = Path(__file__).resolve().parent.parent   
+load_dotenv(RAIZ / ".env")
+
+ARQUIVO = RAIZ / "dados" / "base_teste.xlsx"
+SCHEMA = os.getenv("DB_SCHEMA", "integracao")
 DB = {
-    "host": "localhost", #de acordo com o host do SGBD dos Senhores
-    "port": 5432,  #porta padrão do PostgreSQL a do MySQL 3006
-    "database": "postgres", #nome da data base do Senhores
-    "user": "postgres",   #utilizador dos senhores 
-    "password": "1234"   #senha do utilizador
+    "host": os.getenv("DB_HOST", "localhost"),
+    "port": int(os.getenv("DB_PORT", "5432")),
+    "database": os.getenv("DB_NAME", "postgres"),
+    "user": os.getenv("DB_USER"),
+    "password": os.getenv("DB_PASSWORD"),
 }
+
 
 # ── Converte serial do Excel para data ─────────────────────
 def excel_para_data(valor):
