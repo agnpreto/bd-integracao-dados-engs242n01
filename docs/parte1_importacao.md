@@ -82,63 +82,69 @@ O script original (versão do commit `a503d97`, só com a conexão ajustada para
 
 No log, cada uma das 33 vendas falhou com `o valor nulo na coluna "data_emissao" da relação "venda" viola a restrição de não-nulo`.
 
-| Erro | Efeito | Correção |
+A primeira correção foi a da `excel_para_data`, que impedia as datas de entrarem. Os outros problemas do script estão mapeados abaixo. Eles foram mantidos no código de propósito: as funções originais foram preservadas para que cada erro possa ser analisado e corrigido separadamente.
+
+| Erro | Efeito | Situação |
 | --- | --- | --- |
-| `excel_para_data` faz `int(valor)` esperando o número serial do Excel, mas o pandas já entrega a data convertida (`Timestamp`). O `int()` falha e o `except` genérico devolve `None` | Nenhuma venda entrou (`data_emissao` é NOT NULL). Em `pedido_compra` e `entradas_mercadoria` todas as datas foram gravadas como NULL, sem nenhum aviso | Conversão de data que aceita data já convertida, serial do Excel, ISO e DD/MM/AAAA. Data que não converte é registrada como erro, nunca vira NULL em silêncio |
-| O total impresso é `len(df)`, o tamanho da planilha, e não o que entrou | O script informou "33 registros inseridos em venda" com 0 linhas no banco | O total vem de `SELECT COUNT(*)` no banco, comparado com o número de linhas aprovadas |
-| Mensagem final "Importação concluída com sucesso!" fixa | Sucesso anunciado mesmo com 33 erros | A mensagem de sucesso só aparece se a contagem do banco bater; caso contrário o script termina com erro |
-| `conn.rollback()` a cada linha com erro, com `commit()` só no fim da tabela | Um erro desfaz também todas as linhas anteriores da mesma tabela, que já tinham sido contadas como inseridas | Gravação em uma única transação, depois de validar todos os dados; se algo falhar, nada é gravado e o motivo aparece |
-| Valores vazios substituídos por valores inventados (`0` em preços e `ordem_compra`, filial `1`, horário `00:00:00`) | Dados errados entrariam no banco como se fossem verdadeiros | Vazio em coluna que aceita NULL vira NULL; vazio em coluna obrigatória rejeita a linha, com o motivo |
-| `str(row[...])` sem checar vazio em `idfornecedor`, `razao_social`, `produto_id` e `descricao` | Um campo vazio seria gravado como o texto `"nan"` | Vazio é tratado antes da conversão |
-| `pedido_compra`: `df.iloc[:, :12]` corta as colunas pela posição e renomeia pela ordem | As 11 colunas sem cabeçalho, que têm dados, são descartadas sem verificação; se a ordem das colunas mudar, valores vão para o campo errado | Colunas lidas pelo nome; as colunas sem cabeçalho são descartadas pelo nome e cada linha com conteúdo nelas é registrada |
-| `ON CONFLICT ... DO NOTHING` em todos os INSERTs | Linhas com chave duplicada seriam ignoradas sem aviso | Duplicidade de chave verificada antes da carga e registrada; sem `DO NOTHING`, um conflito vira erro visível |
-| Senha fixa no código (`"password": "1234"`) | Credencial exposta no repositório | Conexão lida do `.env`, que não é versionado |
-| Um `INSERT` por linha, em laço | Lento e difícil de conferir | Inserção em lote (`execute_values`) |
+| `excel_para_data` faz `int(valor)` esperando o número serial do Excel, mas o pandas já entrega a data convertida (`Timestamp`). O `int()` falha e o `except` genérico devolve `None` | Nenhuma venda entrou (`data_emissao` é NOT NULL). Em `pedido_compra` e `entradas_mercadoria` todas as datas foram gravadas como NULL, sem nenhum aviso | **Corrigido.** A função aceita data já convertida (`Timestamp`/`datetime`) e serial do Excel (número). Um valor em outro formato gera erro com a mensagem `data em formato inesperado`, em vez de virar NULL em silêncio |
+| `ON CONFLICT ... DO NOTHING` em todos os INSERTs | Uma linha com chave já existente é ignorada sem aviso. Na reexecução depois da correção das datas, as 29 linhas de `pedido_compra` e as 20 de `entradas_mercadoria` gravadas com data NULL **não foram atualizadas** | **Contornado.** As duas tabelas foram esvaziadas com `DELETE` antes de rodar o script de novo. O comportamento continua no código |
+| O total impresso é `len(df)`, o tamanho da planilha, e não o que entrou | O script informou "33 registros inseridos em venda" com 0 linhas no banco | **Mantido.** A conferência é feita no banco com `SELECT COUNT(*)` (ver "Conferência final") |
+| Mensagem final "Importação concluída com sucesso!" fixa | Sucesso anunciado mesmo com 33 erros | **Mantido.** Mesma conferência no banco |
+| `conn.rollback()` a cada linha com erro, com `commit()` só no fim da tabela | Um erro desfaz também todas as linhas anteriores da mesma tabela, que já tinham sido contadas como inseridas | **Mantido.** Na execução final nenhuma linha deu erro, então nada foi desfeito |
+| Valores vazios substituídos por valores inventados (`0` em preços e `ordem_compra`, filial `1`, horário `00:00:00`) | Dados errados entrariam no banco como se fossem verdadeiros | **Mantido.** A planilha atual não tem células vazias nessas colunas, então nenhum valor foi inventado nesta carga |
+| `str(row[...])` sem checar vazio em `idfornecedor`, `razao_social`, `produto_id` e `descricao` | Um campo vazio seria gravado como o texto `"nan"` | **Mantido.** Não ocorre na planilha atual |
+| `pedido_compra`: `df.iloc[:, :12]` corta as colunas pela posição e renomeia pela ordem | As 11 colunas sem cabeçalho, que têm dados nas linhas 22 a 30, são descartadas sem verificação; se a ordem das colunas mudar, valores vão para o campo errado | **Mantido.** As 12 primeiras colunas estão na ordem esperada. O conteúdo das colunas descartadas foi registrado como erro nos dados (Parte 4) |
+| Senha fixa no código (`"password": "1234"`) | Credencial exposta no repositório | **Corrigido.** A conexão é lida do `.env`, que não é versionado |
+| Um `INSERT` por linha, em laço | Lento em bases grandes | **Mantido.** Com 122 linhas no total, o tempo não é um problema |
 
 ## Tratamentos aplicados aos dados
 
-O script foi reorganizado em camadas, no modelo da arquitetura medalhão. Os dados passam de uma camada para a outra em memória:
+O script foi reorganizado em camadas, no modelo da arquitetura medalhão, **sem mudar a lógica das funções originais**: cada trecho do `importar.py` original foi movido para a camada correspondente. Os dados passam de uma camada para a outra em memória.
 
 ```
-scripts/importar.py      ponto de entrada: bronze → prata → carga → conferência
-scripts/etl/config.py    caminhos e conexão (.env)
-scripts/etl/bronze.py    lê a planilha como veio
-scripts/etl/prata.py     limpa, converte e valida
-scripts/etl/carga.py     grava no banco e confere
+scripts/importar.py      ponto de entrada: conecta e chama bronze → prata → carga, tabela por tabela
+scripts/etl/config.py    caminho da planilha, schema e conexão (lidos do .env)
+scripts/etl/bronze.py    lê cada aba da planilha
+scripts/etl/prata.py     converte cada linha nos valores do INSERT
+scripts/etl/carga.py     executa os INSERTs e o commit
 ```
 
-1. **Bronze:** lê as 5 abas com todas as células como texto, sem converter nem descartar nada, e anota a linha da planilha de cada registro.
-2. **Prata:** para cada tabela, com os nomes de coluna do DDL corrigido:
-   - **Conversão de tipos:** datas (serial do Excel, ISO ou DD/MM/AAAA), números, inteiros e textos, com espaços nas pontas removidos.
-   - **Normalização:** `idproduto` → `produto_id`; colunas sem cabeçalho descartadas; `qtde_pendente` calculada.
-   - **Validações que rejeitam a linha:** campo obrigatório vazio, valor que não converte, texto maior que a coluna, chave primária duplicada.
-   - **Validações que geram aviso:** inconsistências de negócio. A linha entra no banco para poder ser mostrada por SQL na validação com o cliente (Parte 4).
-3. **Carga:** em uma única transação, apaga o conteúdo das 5 tabelas, insere os registros aprovados e confere o `COUNT(*)` de cada tabela. Executar de novo dá sempre o mesmo resultado.
+1. **Bronze (leitura):** `pd.read_excel` de cada aba e remoção de espaços nos nomes das colunas.
+2. **Prata (conversão e normalização):**
+   - **Datas:** `excel_para_data` converte para `date` (já corrigida, ver acima).
+   - **Números:** `float()` para quantidades, preços e chaves `float8`; `int()` para `filial_id`, `venda_id`, `item` e `fornecedor_id`.
+   - **Textos:** `str().strip()` remove espaços nas pontas de códigos e descrições.
+   - **Normalização de nomes:** em `produtos_filial`, `idproduto` da planilha vai para a coluna `produto_id` do banco. Em `pedido_compra`, as 12 primeiras colunas são renomeadas para os nomes do DDL e as colunas sem cabeçalho ficam de fora.
+   - **Campo calculado:** `qtde_pendente = qtde_pedida − qtde_entregue`.
+3. **Carga:** `INSERT ... ON CONFLICT DO NOTHING` linha a linha, com `commit` ao final de cada tabela.
 
-Cada ocorrência é gravada em `docs/relatorio_importacao.csv` (tabela, linha da planilha, coluna, valor, nível e motivo). Na planilha atual nenhuma linha foi rejeitada, e foram registrados estes avisos:
+A ordem de carga é fornecedor → produtos_filial → pedido_compra → entradas_mercadoria → venda, ou seja, cadastros primeiro e movimentos depois.
 
-| Tabela | Aviso | Linhas |
-| --- | --- | --- |
-| produtos_filial | Preço de compra maior que o de venda | 4 |
-| pedido_compra | Dados em 11 colunas sem cabeçalho, à direita da tabela (cópia dos pedidos 12 a 20) | 9 |
-| pedido_compra | Pedido sem ordem de compra (`ordem_compra = 0`) | 11 |
-| pedido_compra | Data de entrega anterior à data do pedido | 20 |
-| pedido_compra | `fornecedor_id` numérico, sem correspondência no cadastro de fornecedor (códigos `F*`) | 29 |
-| pedido_compra | Pedidos que repetem produto, data e preço de outro pedido (pedidos 12 a 20 e 21 a 29) | 18 |
-| entradas_mercadoria | Entrada sem pedido com a mesma `ordem_compra` (ordens 19 e 20) | 2 |
-| entradas_mercadoria | Quantidade recebida diferente da `qtde_entregue` do pedido | 18 |
-| entradas_mercadoria | Quantidade recebida maior que a pedida | 7 |
-| entradas_mercadoria | Entrada anterior à data do pedido | 9 |
-| venda | Quantidade fracionada vendida em unidade (`UN`) | 5 |
-| venda | Produto vendido que não existe em `produtos_filial` (P21 a P28) | 13 |
-| venda | Filial sem produtos cadastrados (filiais 2 e 3) | 4 |
+### Validações
+
+A validação dos dados foi feita depois da carga, por SQL. Assim os dados com problema ficam no banco, e o cliente pode vê-los na reunião de validação (Parte 4):
+
+- **Validação da carga:** contagem de linhas e de datas preenchidas por tabela, comparada com a planilha (ver "Conferência final").
+- **Validação de conteúdo:** 21 consultas em `sql/04_validacao.sql`, uma por tipo de erro (datas fora de ordem, pedidos duplicados, produtos sem cadastro, quantidades e preços divergentes etc.). A lista completa, com as quantidades, está em `docs/parte4_validacao.md`.
 
 ## Conferência final
 
-| Tabela | Linhas na planilha | Aprovadas na prata | Linhas no banco |
+Depois da correção da `excel_para_data`, `pedido_compra` e `entradas_mercadoria` foram esvaziadas (por causa do `ON CONFLICT DO NOTHING`) e o script foi executado de novo. Resultado no banco:
+
+```sql
+SELECT 'venda' AS tabela, COUNT(*) AS linhas, COUNT(data_emissao) AS com_data FROM integracao.venda
+UNION ALL SELECT 'pedido_compra',       COUNT(*), COUNT(data_pedido)  FROM integracao.pedido_compra
+UNION ALL SELECT 'entradas_mercadoria', COUNT(*), COUNT(data_entrada) FROM integracao.entradas_mercadoria
+UNION ALL SELECT 'produtos_filial',     COUNT(*), NULL::bigint        FROM integracao.produtos_filial
+UNION ALL SELECT 'fornecedor',          COUNT(*), NULL::bigint        FROM integracao.fornecedor;
+```
+
+| Tabela | Linhas na planilha | Linhas no banco | Linhas com data |
 | --- | --- | --- | --- |
-| fornecedor | 20 | 20 |  |
-| produtos_filial | 20 | 20 |  |
-| pedido_compra | 29 | 29 |  |
-| entradas_mercadoria | 20 | 20 |  |
-| venda | 33 | 33 |  |
+| fornecedor | 20 | 20 | — |
+| produtos_filial | 20 | 20 | — |
+| pedido_compra | 29 | 29 | 29 |
+| entradas_mercadoria | 20 | 20 | 20 |
+| venda | 33 | 33 | 33 |
+
+Todas as linhas da planilha estão no banco, com todas as datas preenchidas.
