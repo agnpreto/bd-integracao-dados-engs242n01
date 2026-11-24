@@ -1,6 +1,6 @@
 # Equipes
 
-Lista das equipes (até 4 pessoas), montada a partir dos forks (atualizada em 23/11/2026, 07h40). Cada equipe preenche o nome do time e os integrantes no README **do próprio fork**. Só **um integrante por equipe** faz o fork; os outros entram como colaboradores.
+Lista das equipes (até 4 pessoas), montada a partir dos forks (atualizada em 24/11/2026, 07h50). Cada equipe preenche o nome do time e os integrantes no README **do próprio fork**. Só **um integrante por equipe** faz o fork; os outros entram como colaboradores.
 
 | Time | Integrantes (usuário do GitHub) | Fork |
 | --- | --- | --- |
@@ -8,7 +8,7 @@ Lista das equipes (até 4 pessoas), montada a partir dos forks (atualizada em 23
 | a preencher | Daniel Marinho (Marinhodm), João Pedro Pereira, Luiz Gato, Gerson Fujimoto | [Marinhodm/bd-integracao-dados-engs242n01](https://github.com/Marinhodm/bd-integracao-dados-engs242n01) |
 | Equipe Maromba | Jhonn Torres (jhonntorres1898), Calvin Vinícius (Calvinvns), Gustavo Brandão (gustavobrandao1929) | [jhonntorres1898/bd-integracao-dados-engs242n01](https://github.com/jhonntorres1898/bd-integracao-dados-engs242n01) |
 | Cuiudos | Angelo (angelotoledano), Lucas, Nicole | [angelotoledano/bd-integracao-dados-engs242n01](https://github.com/angelotoledano/bd-integracao-dados-engs242n01) |
-| a preencher | Tacio Vinicio (TVPRpontoDev), Jade Coimbra (Coimbra-Jade), Jackeline Alves (jackelinealves27), Jhemily Albuquerque (jhemilyalbuquerque) | [TVPRpontoDev/bd-integracao-dados-engs242n01](https://github.com/TVPRpontoDev/bd-integracao-dados-engs242n01) |
+| a preencher | Tacio Vinicio (TVPRpontoDev, 2417743), Jade Coimbra (Coimbra-Jade, 2417845), Jackeline Alves (jackelinealves27, 2420429), Jhemily Albuquerque (jhemilyalbuquerque, 2421683) — ⚠️ 4 nomes num trabalho em trio (README do fork); falta nome do time; em 23/11 (20h24–21h09) Partes 1 a 4 no `main` do fork (DDL MySQL, consultas, transformações com trigger, validação e `parte1_importacao.md`), todos os commits do Tacio; sem Pull Request | [TVPRpontoDev/bd-integracao-dados-engs242n01](https://github.com/TVPRpontoDev/bd-integracao-dados-engs242n01) |
 | Casal | Wallesson Cesar (wallessonvinhote), Chrisllen Oliveira (ChrislenOliveira) | [wallessonvinhote/bd-integracao-dados-engs242n01](https://github.com/wallessonvinhote/bd-integracao-dados-engs242n01) |
 | For the Horde | Merivaldo Ferreira de Aquino Filho (MerivaldoFerreira, 2270242) | [MerivaldoFerreira/bd-integracao-dados-engs242n01](https://github.com/MerivaldoFerreira/bd-integracao-dados-engs242n01) |
 | Antunes | João Victor Antunes da Silva (AntunesJoao) — ⚠️ no README do fork o usuário está na coluna Matrícula; falta matrícula | [AntunesJoao/bd-integracao-dados-engs242n01](https://github.com/AntunesJoao/bd-integracao-dados-engs242n01) |
