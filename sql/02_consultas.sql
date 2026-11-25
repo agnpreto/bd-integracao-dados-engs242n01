@@ -16,10 +16,22 @@ ORDER BY produto_id;
 
 -- 2.2 Produtos requisitados e não recebidos
 -- A entrada se liga ao pedido pela ordem_compra (regra do enunciado).
--- Pedido sem nenhuma entrada com a mesma ordem_compra = não recebido.
-SELECT p.pedido_id, p.produto_id, p.descricao_produto, p.qtde_pedida
+-- Critério: a soma recebida nas notas fiscais com a mesma ordem_compra é menor
+-- que a quantidade pedida. Entram os pedidos sem nenhum recebimento e os
+-- recebidos só em parte; a coluna qtde_nao_recebida mostra quanto falta.
+-- Observação: os pedidos 19 e 20 estão com ordem_compra = 0 e aparecem como não
+-- recebidos, mas existem as notas NFE19 e NFE20 com ordem 19 e 20 para os mesmos
+-- produtos. É um erro nos dados, tratado na Parte 4 (consultas B9 e B14).
+SELECT p.pedido_id,
+       p.produto_id,
+       p.descricao_produto,
+       p.qtde_pedida,
+       COALESCE(e.qtde_recebida, 0)                 AS qtde_recebida,
+       p.qtde_pedida - COALESCE(e.qtde_recebida, 0) AS qtde_nao_recebida
 FROM integracao.pedido_compra p
-LEFT JOIN integracao.entradas_mercadoria e
+LEFT JOIN (SELECT ordem_compra, SUM(qtde_recebida) AS qtde_recebida
+             FROM integracao.entradas_mercadoria
+            GROUP BY ordem_compra) e
        ON e.ordem_compra = p.ordem_compra
-WHERE e.ordem_compra IS NULL
+WHERE COALESCE(e.qtde_recebida, 0) < p.qtde_pedida
 ORDER BY p.pedido_id;
