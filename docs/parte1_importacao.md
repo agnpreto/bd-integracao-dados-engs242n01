@@ -105,3 +105,10 @@ Resultado do `importar.py` corrigido, igual no PostgreSQL e no MariaDB.
 | pedido_compra | 29 | 29 |
 | entradas_mercadoria | 20 | 20 |
 | venda | 33 | 33 |
+
+## Como reproduzir a importação
+
+1. Execute o DDL correspondente ao SGBD (`sql/01_ddl_postgres.sql` ou `sql/01_ddl_mysql.sql`).
+2. Defina as variáveis de ambiente de conexão (`DB_TIPO`, `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`).
+3. Execute `python scripts/importar.py` para carregar as 5 abas de `dados/base_teste.xlsx` em transação única.
+4. Execute `sql/05_correcoes.sql` para aplicar os saneamentos objetivos com backup e log de auditoria.
