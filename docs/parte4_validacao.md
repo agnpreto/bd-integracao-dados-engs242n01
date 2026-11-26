@@ -87,3 +87,9 @@ O script guarda uma cópia do estado original (`bkp_<tabela>`) e registra cada a
 | C5 | Regra `CHECK` impede novas linhas com data de entrega anterior ao pedido | prevenção |
 
 **Para a reunião:** os itens "Não corrigido" são a pauta com o cliente. Cada um precisa de uma resposta dele (qual preço, qual data, qual fornecedor), porque corrigir por suposição falsificaria o dado.
+
+## Encerramento e próximos passos pós-reunião
+
+1. **Formalização:** Registrar em ata as definições do cliente sobre preços oficiais, unidades de medida e fornecedores divergentes.
+2. **Saneamento definitivo:** Aplicar as regras aprovadas em ambiente de homologação mantendo o log de alterações.
+3. **Homologação final:** Reexecutar `sql/04_validacao.sql` para confirmar que todas as pendências críticas foram zeradas antes da virada para produção.
