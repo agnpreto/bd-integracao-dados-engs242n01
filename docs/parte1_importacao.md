@@ -1,6 +1,6 @@
 # Parte 1: Documentação do processo de importação
 
-Equipe **CoreData**: Ana Júlia Pantoja Chagas (265214) e Rafaela da Silva Tavares (2422211).
+Equipe **CoreData**: Ana Júlia Pantoja Chagas (2652014) e Rafaela da Silva Tavares (2422211).
 
 ## Ferramenta utilizada
 
