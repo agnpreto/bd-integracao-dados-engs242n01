@@ -92,3 +92,9 @@ sql/04_validacao.sql                Parte 4
 7. A apresentação é em **26/11/2026**, e vale o que estiver no Pull Request nessa data.
 
 ⚠️ Não editem o repositório do professor, só o fork da equipe. Um Pull Request por equipe.
+
+## Status da Entrega
+
+- **Etapa 1 (Implantação):** DDL corrigido (`PostgreSQL` e `MySQL`), script de importação validado e documentação concluída em `docs/parte1_importacao.md`.
+- **Etapa 2 (Consultas e Transformações):** Consultas de vendas, pendências e trigger implementadas.
+- **Etapa 3 (Validação):** Roteiro de reunião e auditoria de inconsistências documentados em `docs/parte4_validacao.md`.  
