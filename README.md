@@ -6,14 +6,12 @@
 
 ## Equipe
 
-**Nome do time:** ____________________
+**Nome do time:** CoreData
 
 | Nome | Matrícula | Usuário do GitHub |
 | --- | --- | --- |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
+| Ana Júlia Pantoja Chagas | 265214 | deceased-Akira |
+| Rafaela da Silva Tavares | 2422211 | RafaelaTavares-dev |
 
 ## O cenário
 
