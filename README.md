@@ -10,7 +10,7 @@
 
 | Nome | Matrícula | Usuário do GitHub |
 | --- | --- | --- |
-| Vitor Davi Pereira Soares |  | vitordavips |
+| Vitor Davi Pereira Soares | 2397842 | vitordavips |
 
 ## O cenário
 
