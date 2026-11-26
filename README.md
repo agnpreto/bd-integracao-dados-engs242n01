@@ -10,7 +10,7 @@
 
 | Nome | Matrícula | Usuário do GitHub |
 | --- | --- | --- |
-| Ana Júlia Pantoja Chagas | 265214 | deceased-Akira |
+| Ana Júlia Pantoja Chagas | 2652014 | deceased-Akira |
 | Rafaela da Silva Tavares | 2422211 | RafaelaTavares-dev |
 
 ## O cenário
