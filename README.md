@@ -6,14 +6,12 @@
 
 ## Equipe
 
-**Nome do time:** ____________________
+**Nome do time:** CoreData
 
 | Nome | Matrícula | Usuário do GitHub |
 | --- | --- | --- |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
+| Ana Júlia Pantoja Chagas | 2652014 | deceased-Akira |
+| Rafaela da Silva Tavares | 2422211 | RafaelaTavares-dev |
 
 ## O cenário
 
@@ -94,3 +92,9 @@ sql/04_validacao.sql                Parte 4
 7. A apresentação é em **26/11/2026**, e vale o que estiver no Pull Request nessa data.
 
 ⚠️ Não editem o repositório do professor, só o fork da equipe. Um Pull Request por equipe.
+
+## Status da Entrega
+
+- **Etapa 1 (Implantação):** DDL corrigido (`PostgreSQL` e `MySQL`), script de importação validado e documentação concluída em `docs/parte1_importacao.md`.
+- **Etapa 2 (Consultas e Transformações):** Consultas de vendas, pendências e trigger implementadas.
+- **Etapa 3 (Validação):** Roteiro de reunião e auditoria de inconsistências documentados em `docs/parte4_validacao.md`.  
