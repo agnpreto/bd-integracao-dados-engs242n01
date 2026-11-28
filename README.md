@@ -6,9 +6,9 @@
 
 ## Equipe
 
-**Nome do time:** ____________________
+**Nome do time:** For the Horde
 
-| Nome | Matrícula | Usuário do GitHub |
+| Merivaldo Ferreira de Aquino Filho |  2270242  | MerivaldoFerreira |
 | --- | --- | --- |
 |  |  |  |
 |  |  |  |
